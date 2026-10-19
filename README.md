@@ -427,6 +427,9 @@ each character). The two agree on all 16 test lines. Because a visual-order line
 viewer that runs the algorithm, the examples print it in ASCII, with Hebrew letters as capitals; below, the result is
 described in words.
 
+Hebrew inside code on this page is drawn by your browser from right to left: in `האר[צץ]` the class `[צץ]` appears
+to the left of the letters, and `[א-ת]` reads like a range from tav to alef. What you copy is the order as typed.
+
 ### 6.1 A neutral at the edge of a Latin run
 
 **[run]** In a right-to-left paragraph, "world!" at the end shows its "!" on the far left, before the word, and
@@ -500,8 +503,9 @@ unpointed text gave the same order, so the points are not the cause; the neutral
 ### 7.2 Markdown surfaces
 
 **[record]** Obsidian renders every Markdown block with `dir="auto"`, so each paragraph takes its direction from its
-first strong letter and Hebrew notes display correctly. How GitHub renders this page is something we will check on
-the page itself.
+first strong letter and Hebrew notes display correctly. **[record]** GitHub, checked on this page when it was
+published: `dir="auto"` on every paragraph and heading, none on list items or table cells; every paragraph here
+begins with a Latin letter, so all of them render left to right.
 
 ### 7.3 Editors
 
