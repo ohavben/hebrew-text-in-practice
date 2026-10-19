@@ -1,0 +1,33 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+ body { font: 24px "Noto Sans Hebrew", sans-serif; } .t { width: 700px; white-space: pre; margin: 8px; }</style></head>
+<body><div class="t" dir="rtl">&#x5E9;&#x5DC;&#x5D5;&#x5DD; world!</div>
+<div class="t" dir="rtl">&#x5E9;&#x5DC;&#x5D5;&#x5DD; world!&#x200E;</div>
+<div class="t" dir="rtl">&#x5D0;&#x5E0;&#x5D9; &#x5DB;&#x5D5;&#x5EA;&#x5D1; C++</div>
+<div class="t" dir="rtl">&#x5D0;&#x5E0;&#x5D9; &#x5DB;&#x5D5;&#x5EA;&#x5D1; &#x2068;C++&#x2069;</div>
+<div class="t" dir="rtl">&#x5D7;&#x5D5;&#x5DD; -5 &#x5DE;&#x5E2;&#x5DC;&#x5D5;&#x5EA;</div>
+<div class="t" dir="rtl">&#x5D7;&#x5D5;&#x5DD; &#x2066;-5&#x2069; &#x5DE;&#x5E2;&#x5DC;&#x5D5;&#x5EA;</div>
+<div class="t" dir="ltr">/data/&#x5EA;&#x5D9;&#x5E7;&#x5D9;&#x5D4;/&#x5DE;&#x5E1;&#x5DE;&#x5DB;&#x5D9;&#x5DD;/a.txt</div>
+<div class="t" dir="ltr">see &#x202B;&#x5E9;&#x5DC;&#x5D5;&#x5DD;&#x202C;, 5</div>
+<div class="t" dir="ltr">see &#x2067;&#x5E9;&#x5DC;&#x5D5;&#x5DD;&#x2069;, 5</div>
+<div class="t" dir="rtl">(&#x5E9;&#x5DC;&#x5D5;&#x5DD;) [&#x5E2;&#x5D5;&#x5DC;&#x5DD;]</div>
+<div class="t" dir="ltr">**&#x5E9;&#x5DC;&#x5D5;&#x5DD;** &#x5E2;&#x5D5;&#x5DC;&#x5DD;</div>
+<div class="t" dir="ltr">**&#x5E9;&#x5B8;&#x5C1;&#x5DC;&#x5D5;&#x5B9;&#x5DD;** &#x5E2;&#x5D5;&#x5B9;&#x5DC;&#x5B8;&#x5DD;</div>
+<div class="t" dir="ltr">&#x5E2;&#x5D5;&#x5DC;&#x5DD; **&#x5E9;&#x5DC;&#x5D5;&#x5DD;**</div>
+<div class="t" dir="ltr">&#x5E2;&#x5D5;&#x5B9;&#x5DC;&#x5B8;&#x5DD; **&#x5E9;&#x5B8;&#x5C1;&#x5DC;&#x5D5;&#x5B9;&#x5DD;**</div>
+<div class="t" dir="ltr">see **&#x5E9;&#x5DC;&#x5D5;&#x5DD;** here</div>
+<div class="t" dir="ltr">see **&#x5E9;&#x5B8;&#x5C1;&#x5DC;&#x5D5;&#x5B9;&#x5DD;** here</div>
+<p><bdi id="cb">x</bdi> <span id="cl" dir="ltr">y</span> <span id="ca" dir="auto">z</span> <span id="cn">w</span></p>
+<pre id="out"></pre><pre id="css"></pre><script>
+document.getElementById('css').textContent = 'CSS' + JSON.stringify(['cb', 'cl', 'ca', 'cn'].map(i => getComputedStyle(document.getElementById(i)).unicodeBidi)) + 'END';
+const res = [];
+for (const div of document.querySelectorAll('.t')) {
+  const node = div.firstChild, s = node.data, pos = [];
+  for (let i = 0; i < s.length; i++) {
+    const r = document.createRange(); r.setStart(node, i); r.setEnd(node, i + 1);
+    const b = r.getBoundingClientRect();
+    pos.push([i, b.width > 0 ? b.left : null]);
+  }
+  res.push(pos);
+}
+document.getElementById('out').textContent = 'RESULT' + JSON.stringify(res) + 'END';
+</script></body></html>

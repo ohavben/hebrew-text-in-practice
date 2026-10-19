@@ -1,0 +1,11 @@
+ok [D2a] occurrences found in the pointed verses: observed 2
+ok [D2a] none left after masking: observed 0
+ok [D2a] the stored text is untouched: observed True
+  truncate then mask, the last characters: 05B8 05D0 05B8 0596
+ok [D2b] truncate-then-mask leaves letters of the word on screen: observed True
+ok [D2b] mask-then-truncate does not: observed False
+ok [D2c] after one pass the pattern is still there: observed True
+ok [D2c] repeating until nothing changes removes it: observed False
+ok [D2d] a mask keyed to the defective spelling misses the plene one: observed False
+ok [D2d] an optional vav catches both: observed (True, True)
+--- 9 of 9 checks as expected

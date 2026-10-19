@@ -1,0 +1,19 @@
+ok  [SH1] col -b on a pointed word returns the bare letters: observed 'שלום'
+    LC_ALL=C.utf8  grep -E '[alef-tav]' -> grep: Invalid collation character|
+    LC_ALL=en_US.utf8  grep -E '[alef-tav]' -> שלום|
+    LC_ALL=POSIX  grep -E '[alef-tav]' -> שלום|café|
+ok  [SH2] C.utf8: the range is refused: observed 'grep: Invalid collation character|'
+ok  [SH2] en_US.utf8: only the Hebrew line: observed 'שלום|'
+ok  [SH2] POSIX: the range is bytes, and the French line matches too: observed 'שלום|café|'
+ok  [E5] GNU grep on a file with one NUL: observed 'grep: /tmp/tmp.d8FXydAFhb/nul.txt: binary file matches'
+ok  [E5] grep -a reads it as text: observed '1'
+    ripgrep: binary file matches (found "\0" byte around offset 8)
+ok  [E5] ripgrep names the NUL: observed 'binary'
+ok  [SH4] wc -c of the pointed word (bytes): observed '14'
+ok  [SH4] wc -m in a UTF-8 locale (characters): observed '7'
+ok  [SH4] wc -m in the C locale (bytes again): observed '14'
+    cut -c1 of 'שלום' -> C.utf8: d7 a9 0a · C: d7 0a   (shin is d7 a9)
+ok  [SH5] GNU cut -c1 in C.utf8 returns the whole letter: observed 'd7 a9 0a'
+ok  [SH5] GNU cut -c1 in the C locale returns one byte: observed 'd7 0a'
+--- 12 of 12 checks as expected
+grep (GNU grep) 3.12-modified · col from util-linux 2.42.4 · cut (GNU coreutils) 9.12

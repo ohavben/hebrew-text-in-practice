@@ -1,0 +1,17 @@
+<!doctype html><html lang="he"><head><meta charset="utf-8"><title>bidi</title><style>
+ body { font: 20px/1.6 "Noto Sans Hebrew", sans-serif; margin: 16px; background: #fff; color: #111; }
+ .row { display: grid; grid-template-columns: 340px 1fr; gap: 12px; border-bottom: 1px solid #ccc; padding: 6px 0; }
+ .label { font: 14px/1.4 "DejaVu Sans", sans-serif; color: #444; direction: ltr; text-align: left; }
+ .box { border: 1px dashed #999; padding: 2px 8px; }
+</style></head><body>
+<div class="row"><div class="label">B1 rtl: שלום world!</div><div class="box" dir="rtl">שלום world!</div></div>
+<div class="row"><div class="label">B1 rtl: … world! + &amp;lrm;</div><div class="box" dir="rtl">שלום world!&lrm;</div></div>
+<div class="row"><div class="label">B1 rtl: אני כותב C++</div><div class="box" dir="rtl">אני כותב C++</div></div>
+<div class="row"><div class="label">B1 rtl: … &lt;bdi&gt;C++&lt;/bdi&gt;</div><div class="box" dir="rtl">אני כותב <bdi>C++</bdi></div></div>
+<div class="row"><div class="label">B1 rtl: חום -5 מעלות</div><div class="box" dir="rtl">חום -5 מעלות</div></div>
+<div class="row"><div class="label">B1 rtl: … &lt;bdi dir=ltr&gt;-5&lt;/bdi&gt;</div><div class="box" dir="rtl">חום <bdi dir="ltr">-5</bdi> מעלות</div></div>
+<div class="row"><div class="label">B2 ltr: /data/תיקיה/מסמכים/a.txt</div><div class="box" dir="ltr">/data/תיקיה/מסמכים/a.txt</div></div>
+<div class="row"><div class="label">ISO ltr: see RLE…PDF, 5</div><div class="box" dir="ltr">see &#x202B;שלום&#x202C;, 5</div></div>
+<div class="row"><div class="label">ISO ltr: see &lt;bdi&gt;…&lt;/bdi&gt;, 5</div><div class="box" dir="ltr">see <bdi>שלום</bdi>, 5</div></div>
+<div class="row"><div class="label">B6 rtl: (שלום) [עולם]</div><div class="box" dir="rtl">(שלום) [עולם]</div></div>
+</body></html>

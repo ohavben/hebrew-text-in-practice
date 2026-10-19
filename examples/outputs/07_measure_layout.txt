@@ -1,0 +1,68 @@
+Chromium 154.0.8037.97 Arch Linux · fribidi (GNU FriBidi) 1.0.17
+  computed unicode-bidi: <bdi> isolate · <span dir=ltr> isolate · <span dir=auto> isolate · <span> normal
+ok [ISO] <bdi> and elements with a dir attribute are isolates; a plain span is not: observed ['isolate', 'isolate', 'isolate', 'normal']
+  rtl  WLVM world!
+       browser: !worldMVLW
+       fribidi: !worldMVLW
+ok [X] browser and FriBidi agree on WLVM world!: observed '!worldMVLW'
+  rtl  WLVM world!<MARK>
+       browser: world!MVLW
+       fribidi: world!MVLW
+ok [X] browser and FriBidi agree on WLVM world!<MARK>: observed 'world!MVLW'
+  rtl  ANY KVJB C++
+       browser: ++CBJVKYNA
+       fribidi: ++CBJVKYNA
+ok [X] browser and FriBidi agree on ANY KVJB C++: observed '++CBJVKYNA'
+  rtl  ANY KVJB <ISOLATE>C++<ISOLATE>
+       browser: C++BJVKYNA
+       fribidi: C++BJVKYNA
+ok [X] browser and FriBidi agree on ANY KVJB <ISOLATE>C++<ISOLATE>: observed 'C++BJVKYNA'
+  rtl  XVM -5 MOLVJ
+       browser: JVLOM5-MVX
+       fribidi: JVLOM5-MVX
+ok [X] browser and FriBidi agree on XVM -5 MOLVJ: observed 'JVLOM5-MVX'
+  rtl  XVM <ISOLATE>-5<ISOLATE> MOLVJ
+       browser: JVLOM-5MVX
+       fribidi: JVLOM-5MVX
+ok [X] browser and FriBidi agree on XVM <ISOLATE>-5<ISOLATE> MOLVJ: observed 'JVLOM-5MVX'
+  ltr  /data/JYQYH/MSMKYM/a.txt
+       browser: /data/MYKMSM/HYQYJ/a.txt
+       fribidi: /data/MYKMSM/HYQYJ/a.txt
+ok [X] browser and FriBidi agree on /data/JYQYH/MSMKYM/a.txt: observed '/data/MYKMSM/HYQYJ/a.txt'
+  ltr  see <EMBEDDING>WLVM<FORMATTING>, 5
+       browser: see5,MVLW
+       fribidi: see5,MVLW
+ok [X] browser and FriBidi agree on see <EMBEDDING>WLVM<FORMATTING>, 5: observed 'see5,MVLW'
+  ltr  see <ISOLATE>WLVM<ISOLATE>, 5
+       browser: seeMVLW,5
+       fribidi: seeMVLW,5
+ok [X] browser and FriBidi agree on see <ISOLATE>WLVM<ISOLATE>, 5: observed 'seeMVLW,5'
+  rtl  (WLVM) [OVLM]
+       browser: ]MLVO[)MVLW(
+       fribidi: ]MLVO[)MVLW(
+ok [X] browser and FriBidi agree on (WLVM) [OVLM]: observed ']MLVO[)MVLW('
+  ltr  **WLVM** OVLM
+       browser: **MLVO**MVLW
+       fribidi: **MLVO**MVLW
+ok [X] browser and FriBidi agree on **WLVM** OVLM: observed '**MLVO**MVLW'
+  ltr  **WָׁLVֹM** OVֹLָM
+       browser: **MLVO**MVLW
+       fribidi: **MLVO**MVLW
+ok [X] browser and FriBidi agree on **WָׁLVֹM** OVֹLָM: observed '**MLVO**MVLW'
+  ltr  OVLM **WLVM**
+       browser: MVLW**MLVO**
+       fribidi: MVLW**MLVO**
+ok [X] browser and FriBidi agree on OVLM **WLVM**: observed 'MVLW**MLVO**'
+  ltr  OVֹLָM **WָׁLVֹM**
+       browser: MVLW**MLVO**
+       fribidi: MVLW**MLVO**
+ok [X] browser and FriBidi agree on OVֹLָM **WָׁLVֹM**: observed 'MVLW**MLVO**'
+  ltr  see **WLVM** here
+       browser: see**MVLW**here
+       fribidi: see**MVLW**here
+ok [X] browser and FriBidi agree on see **WLVM** here: observed 'see**MVLW**here'
+  ltr  see **WָׁLVֹM** here
+       browser: see**MVLW**here
+       fribidi: see**MVLW**here
+ok [X] browser and FriBidi agree on see **WָׁLVֹM** here: observed 'see**MVLW**here'
+--- 17 of 17 checks as expected

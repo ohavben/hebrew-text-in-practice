@@ -1,0 +1,31 @@
+categories in U+0591..U+05C7: {'Mn': 51, 'Pd': 1, 'Po': 3}
+   not a mark: U+05BE HEBREW PUNCTUATION MAQAF - Pd
+   not a mark: U+05C0 HEBREW PUNCTUATION PASEQ - Po
+   not a mark: U+05C3 HEBREW PUNCTUATION SOF PASUQ - Po
+   not a mark: U+05C6 HEBREW PUNCTUATION NUN HAFUKHA - Po
+ok [U1] code points in the block that are NOT combining marks: observed ['05BE', '05C0', '05C3', '05C6']
+
+Gen 2:6, as stored:       ו{05B0}א{05B5}{0596}ד י{05B7}{05BD}ע{05B2}ל{05B6}{05A3}ה מ{05B4}ן{05BE}ה{05B8}א{05B8}{0591}ר{05B6}ץ ו{05B0}ה{05B4}ש{05C1}{05B0}ק{05B8}{0596}ה א{05B6}{05BD}ת{05BE}כ{05BC}{05B8}ל{05BE}פ{05BC}{05B0}נ{05B5}{05BD}י{05BE}ה{05B8}{05BD}א{05B2}ד{05B8}מ{05B8}{05BD}ה{05C3}
+one-range strip:          ואד יעלה מןהארץ והשקה אתכלפניהאדמה
+mark strip (category M):  ואד יעלה מן־הארץ והשקה את־כל־פני־האדמה׃
+ok [U1] Gen 2:6 words before stripping: observed 9
+ok [U1] Gen 2:6 words after the one-range strip (maqaf deleted, words fused): observed 5
+ok [U1] Gen 2:6 words after the mark strip: observed 9
+ok [U1] the sof pasuq survives the mark strip: observed True
+ok [U1] the sof pasuq survives the one-range strip: observed False
+ok [U1] Gen 18:15: strokes U+05C0 kept by the mark strip: observed 3
+ok [U1] Gen 18:15: strokes U+05C0 kept by the one-range strip: observed 0
+
+Gen 18:9, the dotted word: א{05B5}{05C4}ל{05B8}{05C4}{0594}י{05C4}ו{05C4}
+ok [U3] U+05C4 is a combining mark: observed 'Mn'
+ok [U3] dots in Gen 18:9 before / after the mark strip: observed (4, 0)
+
+U+05BC in the ten verses, by the letter it sits on: {'dagesh': 61, 'shuruk (on vav, no other vowel)': 10}
+   its one name: U+05BC HEBREW POINT DAGESH OR MAPIQ
+ok [U6] one code point, several roles found in these verses: observed True
+Gen 18:15: stroke after ['DARGA'], next disjunctive TEVIR -> paseq
+Gen 18:15: stroke after ['MUNAH'], next disjunctive ETNAHTA -> paseq
+Gen 18:15: stroke after ['MERKHA'], next disjunctive TIPEHA -> paseq
+Exod 2:11: stroke after ['MUNAH'], next disjunctive REVIA -> legarmeh
+ok [U2] one code point, read by the accents around it: observed {'Gen 18:15': ['paseq', 'paseq', 'paseq'], 'Exod 2:11': ['legarmeh']}
+--- 12 of 12 checks as expected

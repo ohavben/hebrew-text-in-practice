@@ -1,0 +1,38 @@
+  U+05B0 HEBREW POINT SHEVA                 combining class 10
+  U+05B4 HEBREW POINT HIRIQ                 combining class 14
+  U+05B7 HEBREW POINT PATAH                 combining class 17
+  U+05B8 HEBREW POINT QAMATS                combining class 18
+  U+05BC HEBREW POINT DAGESH OR MAPIQ       combining class 21
+  U+05BD HEBREW POINT METEG                 combining class 22
+  U+05C1 HEBREW POINT SHIN DOT              combining class 24
+  U+05C2 HEBREW POINT SIN DOT               combining class 25
+  U+0591 HEBREW ACCENT ETNAHTA              combining class 220
+  U+05A3 HEBREW ACCENT MUNAH                combining class 220
+
+words in the ten verses: 111; changed by NFC: 59; changed by NFD: 59
+  stored: כ{05BC}{05B8}ל
+  NFC:    כ{05B8}{05BC}ל
+ok [N1] NFC changes some WLC words: observed True
+ok [N1] NFC and NFD agree here (no Hebrew precomposed letters in the stored text): observed True
+ok [N1] the two orders are different strings: observed False
+ok [N1] and the same string after NFC: observed True
+
+Gen 2:25 sha256 as written 2f7ffb364396 · after NFC 1ed4d6413af1
+ok [N1] normalizing before hashing changes the hash (store and hash the bytes as written): observed False
+ok [N1] NFC puts the hiriq before the patah: observed 'לִַ'
+ok [N1] with a COMBINING GRAPHEME JOINER between them, NFC keeps the order: observed 'לַ͏ִ'
+  U+FB2A HEBREW LETTER SHIN WITH SHIN DOT         NFC -> ש{05C1}        NFKC -> ש{05C1}
+  U+FB35 HEBREW LETTER VAV WITH DAGESH            NFC -> ו{05BC}        NFKC -> ו{05BC}
+  U+FB4B HEBREW LETTER VAV WITH HOLAM             NFC -> ו{05B9}        NFKC -> ו{05B9}
+  U+FB21 HEBREW LETTER WIDE ALEF                  NFC -> {FB21}         NFKC -> א
+  U+FB4F HEBREW LIGATURE ALEF LAMED               NFC -> {FB4F}         NFKC -> אל
+ok [N2] U+FB2A (shin with shin dot) is not the letter shin: observed False
+ok [N2] NFC decomposes U+FB2A to shin + shin dot: observed 'שׁ'
+ok [N2] NFC leaves the wide alef U+FB21 alone; NFKC maps it to alef: observed ('ﬡ', 'א')
+ok [N2] the alef-lamed ligature U+FB4F needs NFKC: observed (True, 'אל')
+
+with a foreign mark: ש{0307}לום -> Hebrew-range strip -> ש{0307}לום
+ok [N3] a Hebrew-range strip leaves U+0307 in place: observed True
+ok [N3] so the word does not equal its plain spelling: observed False
+ok [N3] a category strip (all marks) removes it: observed 'שלום'
+--- 14 of 14 checks as expected

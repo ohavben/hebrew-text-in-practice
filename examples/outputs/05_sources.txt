@@ -1,0 +1,27 @@
+Gen 2:6 raw (stripped): ו/אד יעלה מן ה/ארץ ו/השקה את כל פני ה/אדמה 
+Gen 2:6 text (stripped): ואד יעלה מן הארץ והשקה את כל פני האדמה 
+ok [T1] slashes inside the words of raw Gen 2:6: observed 4
+ok [T1] "הארץ" (the land) in the raw text: observed 0
+ok [T1] "הארץ" once the slash is removed: observed 1
+
+cp1255 bytes: e1 c0 cc f8 c5 e0 f9 c4 d1 e9 fa | UTF-8 bytes: d7 91 d6 b0 d6 bc d7 a8 d6 b5 d7 90 d7 a9 d6 b4 d7 81 d7 99 d7 aa
+ok [T3] a UTF-8 needle in the cp1255 bytes: observed False
+ok [T3] the same bytes decoded as cp1255: observed 'בְּרֵאשִׁית'
+  decoding the cp1255 bytes as UTF-8 fails with: invalid continuation byte
+ok [T3] decoding them as UTF-8 fails: observed True
+an em dash, UTF-8 bytes e2 80 94 read as cp1255 -> ג€” ['U+05D2', 'U+20AC', 'U+201D']
+ok [T3] good UTF-8 read through cp1255 shows gimel + euro sign + a quote mark: observed ['05D2', '20AC', '201D']
+ok [T3] windows-1255 can carry the te'amim (U+0591 etnahta): observed False
+ok [T5] Exod 1:7 ends a section in the WLC markup (seg x-pe): observed True
+
+with the marker:   ובני ישראל פרו וישרצו וירבו ויעצמו במאד מאד ותמלא הארץ אתם פ
+class [פס] removed: ובני ישראל רו וישרצו וירבו ויעצמו במאד מאד ותמלא הארץ אתם 
+token filter:       ובני ישראל פרו וישרצו וירבו ויעצמו במאד מאד ותמלא הארץ אתם
+ok [T5] the class cleaner also deletes letters inside words: observed True
+ok [T5] the token filter removes only the marker: observed 11
+
+Lev 9:22 ketiv (written): ידו | qere (read): י{05B8}ד{05B8}{059B}יו
+ok [T6] the written word is unpointed: observed False
+ok [T6] and its letters differ from the read word: observed False
+ok [T6] the text field holds the written form only: observed (True, False)
+--- 14 of 14 checks as expected

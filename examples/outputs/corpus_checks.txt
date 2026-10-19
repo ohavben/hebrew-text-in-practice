@@ -1,0 +1,26 @@
+morphhb header, latest revision: 2018.12.14 Release of full morphology
+Gen 1:1 words 7 · letters 28 (known answer: 7 and 28)
+
+TORAH (Gen-Deut, written text, notes removed):
+  verses                5,853
+  words                79,982
+  letters             304,850
+  words_with_slash     39,585
+  nfc_changed          37,528
+  qere                     67
+  pe                      293
+  samekh                  394
+  share of words changed by NFC: 46.9% · words carrying a morphhb slash: 49.5%
+  the stroke U+05C0 as a separate token: {'total': 378, 'after another accent': 63, 'legarmeh by the rule (munach before, next disjunctive revia)': 280, 'part of shalshelet (after a shalshelet word)': 4, 'after a munach word': 315}
+
+WHOLE BIBLE (39 books):
+  verses 23,213 · ketiv/qere places 1,251 · combining grapheme joiners (U+034F) 0
+  verses with the upper dot U+05C4: 15 · dotted letters: 53
+    2Sam.19.20:3 Deut.29.28:10 Ezek.41.20:5 Ezek.46.22:7 Gen.16.5:1 Gen.18.9:4 Gen.19.33:1 Gen.33.4:6 Gen.37.12:2 Isa.44.9:3 Num.21.30:1 Num.29.15:1 Num.3.39:5 Num.9.10:1 Ps.27.13:3
+  letters carrying two vowel points: 641 (stored order already NFC order: 0, reordered by NFC: 641)
+  points on the final letters:
+    HEBREW LETTER FINAL KAF  {'SHEVA': 7405, 'QAMATS': 6516, 'DAGESH OR MAPIQ': 126}
+    HEBREW LETTER FINAL MEM  {}
+    HEBREW LETTER FINAL NUN  {'QAMATS': 40}
+    HEBREW LETTER FINAL PE   {'DAGESH OR MAPIQ': 1, 'SHEVA': 1}
+    HEBREW LETTER FINAL TSADI {}

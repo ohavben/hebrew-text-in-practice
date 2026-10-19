@@ -1,0 +1,27 @@
+pointed word: ו{05B7}י{05BC}{05B4}{05BD}ה{05B0}י{05A4}ו{05BC} 
+  re.findall(r"\w+") -> ['ו', 'י', 'ה', 'י', 'ו']
+ok [S1] \w+ returns the pointed word in pieces: observed True
+ok [S1] \w+ on the stripped word returns it whole: observed ['ויהיו']
+
+four pointed words -> {'דבר': 4} consonant string(s)
+ok [S2] four different words, one stripped string: observed 1
+
+"ארץ" in the ten verses: exact 0; with up to three proclitics 2 ['הארצ']
+ok [S5] the exact-word search misses the prefixed forms: observed True
+ok [S5] the prefix pattern also takes in a word that only looks prefixed: observed True
+ok [S6] a bare query against the pointed text: observed 0
+ok [S6] the same query after stripping the text: observed 2
+ok [S7] the control phrase, searched the same broken way, also returns zero: observed 0
+ok [S7] and after stripping, the control is found: observed True
+
+SQLite 3.54.0
+unicode61 tokens of pointed Gen 2:6: 30 (the verse has 9 words); one-letter tokens: 30
+  first ten: ['ו', 'א', 'ד', 'י', 'ע', 'ל', 'ה', 'מ', 'ן', 'ה']
+ok [S9] unicode61 makes more tokens than the verse has words: observed True
+ok [S9] a bare word does not find the pointed verse: observed 0
+ok [S10] the geresh is a separator: the abbreviation shrinks to its letter: observed ['אמר', 'ר', 'יוחנן']
+  MATCH 'רש"י' -> unterminated string
+ok [S10] an acronym typed with an ASCII double quote is a query syntax error: observed True
+ok [S12] the article glued to a Latin word is one token: observed True
+ok [S11] trigram: a two-letter word is not found, a three-letter one is: observed (0, 1)
+--- 15 of 15 checks as expected

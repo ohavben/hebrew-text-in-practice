@@ -1,0 +1,15 @@
+<!doctype html><html lang="he"><head><meta charset="utf-8"><title>blocks</title><style>
+ body { font: 20px/1.6 "Noto Sans Hebrew", sans-serif; margin: 16px; background: #fff; color: #111; }
+ .row { display: grid; grid-template-columns: 340px 1fr; gap: 12px; border-bottom: 1px solid #ccc; padding: 6px 0; }
+ .label { font: 14px/1.4 "DejaVu Sans", sans-serif; color: #444; direction: ltr; text-align: left; }
+ .box { border: 1px dashed #999; padding: 2px 8px; }
+</style></head><body>
+<div class="row"><div class="label">B4 one element, no dir (inherits ltr)</div><div class="box">זה משפט בעברית. This is an English sentence.</div></div>
+<div class="row"><div class="label">B4 one element, dir=rtl</div><div class="box" dir="rtl">זה משפט בעברית. This is an English sentence.</div></div>
+<div class="row"><div class="label">B4 one element, dir=auto (first strong = English)</div><div class="box" dir="auto">This is an English sentence. זה משפט בעברית.</div></div>
+<div class="row"><div class="label">B4 two blocks, dir=auto each</div><div class="box"><div dir="auto">זה משפט בעברית.</div><div dir="auto">This is an English sentence.</div></div></div>
+<div class="row"><div class="label">B4 one element, unicode-bidi: plaintext, two lines</div><div class="box"><div style="unicode-bidi: plaintext; white-space: pre-line">זה משפט בעברית.
+This is an English sentence.</div></div></div>
+<div class="row"><div class="label">B5 raw Markdown in rtl: **שָׁלוֹם** עוֹלָם</div><div class="box" dir="rtl">**שָׁלוֹם** עוֹלָם</div></div>
+<div class="row"><div class="label">B5 raw Markdown in rtl: עוֹלָם **שָׁלוֹם**</div><div class="box" dir="rtl">עוֹלָם **שָׁלוֹם**</div></div>
+</body></html>

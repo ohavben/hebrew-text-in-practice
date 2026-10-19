@@ -1,0 +1,13 @@
+Chrome/154.0.8037.97 · <html lang="he">
+font-family: Arial                      -> Arial (54) + Keter YG (15)
+font-family: Arial, sans-serif          -> Arial (54) + Keter YG (15)
+font-family: DejaVu Sans                -> DejaVu Sans (64) + Keter YG (15)
+font-family: DejaVu Sans, sans-serif    -> DejaVu Sans (64) + Keter YG (15)
+font-family: Times New Roman, serif     -> Times New Roman (54) + Keter YG (15)
+font-family: Noto Sans Hebrew           -> Noto Sans Hebrew (82)
+font-family: Ezra SIL                   -> Ezra SIL (70)
+font-family: Keter YG                   -> Keter YG (70)
+font-family: Liberation Mono            -> Liberation Mono (67)
+font-family: monospace                  -> Noto Sans Mono (6) + Times New Roman (48) + Keter YG (15)
+font-family: sans-serif                 -> Arial (54) + Keter YG (15)
+font-family: serif                      -> Times New Roman (54) + Keter YG (15)

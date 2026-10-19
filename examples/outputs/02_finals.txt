@@ -1,0 +1,22 @@
+HEBREW LETTER FINAL KAF          U+05DA   HEBREW LETTER KAF          U+05DB
+HEBREW LETTER FINAL MEM          U+05DD   HEBREW LETTER MEM          U+05DE
+HEBREW LETTER FINAL NUN          U+05DF   HEBREW LETTER NUN          U+05E0
+HEBREW LETTER FINAL PE           U+05E3   HEBREW LETTER PE           U+05E4
+HEBREW LETTER FINAL TSADI        U+05E5   HEBREW LETTER TSADI        U+05E6
+ok [F1] query typed with the medial form, text not folded: observed 0
+ok [F1] query typed with the final form, text not folded (works only if you typed the right form): observed 2
+ok [F1] query folded, text NOT folded (one side only): observed 0
+ok [F1] text folded, query typed with the final form (the other side only): observed 0
+
+"הארצ" written either way, counted by the class [צץ]: 2
+ok [F1] both sides folded = the count by the both-forms class: observed 2
+ok [F1] and that count is not zero: observed True
+
+"מן" in the synthetic phrase "מן המנחה ומן הענן": folded, anywhere 3; folded, at a word end 2
+   folded matches inside longer words: ['המנחה']
+ok [F2] the folded needle also matches inside a longer word: observed ['המנחה']
+ok [F2] a word-end boundary after the folded needle removes exactly those: observed 2
+
+tokens that end in a medial letter, all correct as written: ['תש״פ', 'כ׳', 'פ׳', 'יד:כ']
+ok [F3] a "medial at the end" rule flags correct tokens: observed 2
+--- 9 of 9 checks as expected

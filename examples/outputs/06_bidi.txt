@@ -1,0 +1,49 @@
+fribidi (GNU FriBidi) 1.0.17
+ok [B0] a line that starts with Hebrew: observed 'R'
+ok [B0] a line that starts with Latin: observed 'L'
+ok [B0] a line that starts with a digit, then Hebrew (a digit is weak): observed 'R'
+  "world!" at the end of an RTL line
+     logical: WLVM world!
+     visual:  !world MVLW
+ok [B1] the "!" shows at the far left, before "world": observed True
+  the same with an LRM after the "!"
+     logical: WLVM world!<MARK>
+     visual:  world! MVLW
+ok [B1] with an LRM the "!" stays after "world": observed True
+  "C++" at the end of an RTL line
+     logical: ANY KVJB C++
+     visual:  ++C BJVK YNA
+ok [B1] "C++" shows as "++C": observed True
+  "C++" in an FSI ... PDI isolate
+     logical: ANY KVJB <ISOLATE>C++<ISOLATE>
+     visual:  C++ BJVK YNA
+ok [B1] isolated, it shows as "C++": observed True
+  a negative number in RTL text
+     logical: XVM -5 MOLVJ
+     visual:  JVLOM 5- MVX
+ok [B1] the minus sign shows on the right of the 5: observed True
+  the number in an LRI ... PDI isolate
+     logical: XVM <ISOLATE>-5<ISOLATE> MOLVJ
+     visual:  JVLOM -5 MVX
+ok [B1] isolated, it shows as "-5": observed True
+  an LTR path with two Hebrew folders
+     logical: /data/JYQYH/MSMKYM/a.txt
+     visual:  /data/MYKMSM/HYQYJ/a.txt
+ok [B2] the second folder shows before the first: observed True
+  "(שלום)" in RTL: with mirroring (MVLW) · without )MVLW(
+ok [B6] with mirroring the visual line starts with "(" (the stored ")" drawn mirrored): observed '(MVLW)'
+ok [B6] without mirroring the stored characters would face the wrong way: observed ')MVLW('
+ok [NSM] without L3 the holam stands BEFORE its vav (a left-to-right viewer puts it on the letter before): observed True
+  visual, no L3:   05DD 05B9 05D5 05DC 05C1 05B8 05E9
+  visual, with L3: 05DD 05D5 05B9 05DC 05E9 05B8 05C1
+ok [NSM] with L3 the holam follows its vav: observed True
+ok [NSM] the two orders differ: observed False
+  RLE ... PDF around a Hebrew word in an LTR line
+     logical: see <EMBEDDING>WLVM<FORMATTING>, 5
+     visual:  see 5 ,MVLW
+  RLI ... PDI around the same word
+     logical: see <ISOLATE>WLVM<ISOLATE>, 5
+     visual:  see MVLW, 5
+ok [ISO] the embedding pulls ", 5" into the Hebrew run: observed 'see 5 ,MVLW'
+ok [ISO] the isolate keeps it outside: observed 'see MVLW, 5'
+--- 17 of 17 checks as expected

@@ -1,0 +1,13 @@
+Chrome/154.0.8037.97 · no lang attribute
+font-family: Arial                      -> Arial (69)
+font-family: Arial, sans-serif          -> Arial (69)
+font-family: DejaVu Sans                -> DejaVu Sans (81)
+font-family: DejaVu Sans, sans-serif    -> DejaVu Sans (81)
+font-family: Times New Roman, serif     -> Times New Roman (69)
+font-family: Noto Sans Hebrew           -> Noto Sans Hebrew (82)
+font-family: Ezra SIL                   -> Ezra SIL (70)
+font-family: Keter YG                   -> Keter YG (70)
+font-family: Liberation Mono            -> Liberation Mono (67)
+font-family: monospace                  -> Noto Sans Mono (23) + Times New Roman (48)
+font-family: sans-serif                 -> Arial (69)
+font-family: serif                      -> Times New Roman (69)
