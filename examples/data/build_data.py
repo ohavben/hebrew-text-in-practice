@@ -101,7 +101,7 @@ def main(wlc_dir):
         book, c, vv = osis.split('.')
         out.append({'ref': f'{book} {c}:{vv}', 'osis': osis, 'text': text, 'raw': raw,
                     'qere': qere, 'segs': segs, 'shows': shows})
-    json.dump({'source': 'Westminster Leningrad Codex via Open Scriptures Hebrew Bible (morphhb); text public domain, markup CC BY 4.0',
+    json.dump({'source': 'Westminster Leningrad Codex (public domain); adapted from the Open Scriptures Hebrew Bible, https://github.com/openscriptures/morphhb, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)',
                'verses': out}, sys.stdout, ensure_ascii=False, indent=1)
     sys.stdout.write('\n')
 

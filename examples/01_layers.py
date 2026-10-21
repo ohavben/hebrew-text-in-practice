@@ -8,6 +8,7 @@ Claims tested (section 1 of the resource):
   U3  The extraordinary dots (U+05C4) are combining marks inside the same range: a mark strip removes them too.
   U6  One code point, U+05BC, is dagesh, mappiq and shuruk: its function depends on the letter it sits on.
   U2  U+05C0 is one code point for two signs: the paseq, and the stroke of the accent legarmeh.
+  U4  Some layers have no Unicode at all: no character name mentions the tagin, the crowns of a Torah scroll.
 Run: python3 01_layers.py
 """
 import os, re, sys, unicodedata
@@ -26,6 +27,7 @@ print('categories in U+0591..U+05C7:', {k: len(v) for k, v in sorted(cats.items(
 not_marks = [ch for ch in block if not unicodedata.category(ch).startswith('M')]
 for ch in not_marks:
     print('   not a mark:', cp(ch), '-', unicodedata.category(ch))
+check('U1', 'code points in the block · of them combining marks (category Mn)', (len(block), len(cats.get('Mn', []))), (55, 51))
 check('U1', 'code points in the block that are NOT combining marks', [f'{ord(c):04X}' for c in not_marks],
       ['05BE', '05C0', '05C3', '05C6'])
 
@@ -80,7 +82,8 @@ for v in V.values():
             roles[role] = roles.get(role, 0) + 1
 print('\nU+05BC in the ten verses, by the letter it sits on:', roles)
 print('   its one name:', cp(DOT))
-check('U6', 'one code point, several roles found in these verses', len(roles) >= 2, True)
+check('U6', 'one code point, several roles: in these verses, all of them · by role (no mappiq here)',
+      (sum(roles.values()), roles), (71, {'dagesh': 61, 'shuruk (on vav, no other vowel)': 10}))
 
 # --- U2: the stroke, two signs -------------------------------------------------------------------------------
 # The prose (21-book) disjunctive accents; every other accent in U+0591..U+05AF is a conjunctive (or a mark).
@@ -108,4 +111,11 @@ for ref in ('Gen 18:15', 'Exod 2:11'):
             kinds.setdefault(ref, []).append(kind)
             print(f'{ref}: stroke after {acc}, next disjunctive {unicodedata.name(nd).replace("HEBREW ACCENT ", "") if nd else None} -> {kind}')
 check('U2', 'one code point, read by the accents around it', kinds, {'Gen 18:15': ['paseq'] * 3, 'Exod 2:11': ['legarmeh']})
+
+# --- U4: no character for the tagin ---------------------------------------------------------------------------
+names = [unicodedata.name(chr(c), '') for c in range(0x110000)]
+print(f'\nUnicode {unicodedata.unidata_version}: {sum(map(bool, names))} named code points')
+check('U4', 'names that mention TAGIN · Hebrew names that mention a CROWN · the control name HEBREW MARK UPPER DOT',
+      (sum('TAGIN' in n for n in names), sum('HEBREW' in n and 'CROWN' in n for n in names), names.count('HEBREW MARK UPPER DOT')),
+      (0, 0, 1))
 done()

@@ -1,4 +1,4 @@
-fribidi (GNU FriBidi) 1.0.17
+fribidi (GNU FriBidi) 1.0.17 · --nomirror and --reordernsm take effect: yes (1.0.17 or later)
 ok [B0] a line that starts with Hebrew: observed 'R'
 ok [B0] a line that starts with Latin: observed 'L'
 ok [B0] a line that starts with a digit, then Hebrew (a digit is weak): observed 'R'
@@ -30,14 +30,15 @@ ok [B1] isolated, it shows as "-5": observed True
      logical: /data/JYQYH/MSMKYM/a.txt
      visual:  /data/MYKMSM/HYQYJ/a.txt
 ok [B2] the second folder shows before the first: observed True
-  "(שלום)" in RTL: with mirroring (MVLW) · without )MVLW(
+  "(שלום)" in RTL: with mirroring (MVLW) · without (fribidi --vtol) )MVLW( · fribidi --nomirror )MVLW(
 ok [B6] with mirroring the visual line starts with "(" (the stored ")" drawn mirrored): observed '(MVLW)'
 ok [B6] without mirroring the stored characters would face the wrong way: observed ')MVLW('
-ok [NSM] without L3 the holam stands BEFORE its vav (a left-to-right viewer puts it on the letter before): observed True
+ok [B6] FriBidi 1.0.17: fribidi --nomirror gives the stored order (it does from 1.0.17; before, it mirrors anyway): observed True
   visual, no L3:   05DD 05B9 05D5 05DC 05C1 05B8 05E9
   visual, with L3: 05DD 05D5 05B9 05DC 05E9 05B8 05C1
 ok [NSM] with L3 the holam follows its vav: observed True
-ok [NSM] the two orders differ: observed False
+ok [NSM] FriBidi 1.0.17, without L3: the holam stands BEFORE its vav (a left-to-right viewer puts it on the letter before): observed True
+ok [NSM] FriBidi 1.0.17: the two orders differ: observed False
   RLE ... PDF around a Hebrew word in an LTR line
      logical: see <EMBEDDING>WLVM<FORMATTING>, 5
      visual:  see 5 ,MVLW
@@ -46,4 +47,4 @@ ok [NSM] the two orders differ: observed False
      visual:  see MVLW, 5
 ok [ISO] the embedding pulls ", 5" into the Hebrew run: observed 'see 5 ,MVLW'
 ok [ISO] the isolate keeps it outside: observed 'see MVLW, 5'
---- 17 of 17 checks as expected
+--- 18 of 18 checks as expected

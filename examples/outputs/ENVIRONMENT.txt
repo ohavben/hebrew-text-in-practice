@@ -4,4 +4,11 @@ fribidi: fribidi (GNU FriBidi) 1.0.17
 browser: Chromium 154.0.8037.97 Arch Linux
 sqlite: 3.54.0
 unicodedata: 16.0.0
+grep: grep (GNU grep) 3.12-modified
+coreutils: cut (GNU coreutils) 9.12
+col: col from util-linux 2.42.4
+ripgrep: ripgrep 15.2.0
+locale: charmap UTF-8 · C.UTF-8 listed · en_US.UTF-8 listed (locale -a)
+fontconfig: fontconfig version 2.18.3 · sans-serif for lang=he: Keter YG
+user fontconfig files: conf.d/60-hebrew.conf conf.d/60-hebrew-taamim.conf
 os: Linux 7.2.9-2-cachyos

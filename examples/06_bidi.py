@@ -17,9 +17,12 @@ Claims tested (section 6 of the resource):
       a program that writes visual-order text without L3 hands its marks to the wrong letters.
   ISO An embedding (LRE/RLE ... PDF) lets the following neutrals and numbers join the embedded run; an
       isolate (LRI/RLI/FSI ... PDI) keeps them in the outer text.
+Before FriBidi 1.0.17 the fribidi command ignores --nomirror and --reordernsm (it always mirrors and always applies
+L3). The stored order without mirroring is therefore read from the visual-to-logical map (fribidi --vtol), which
+every version gives; the checks that need the two flags say which version ran and what that version does.
 Run: python3 06_bidi.py      (needs the fribidi command: GNU FriBidi)
 """
-import os, shutil, subprocess, sys, unicodedata
+import os, re, shutil, subprocess, sys, unicodedata
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from _common import check, done
 
@@ -49,7 +52,16 @@ def show(label, logical, base=None, extra=()):
     print(f'  {label}\n     logical: {ascii_line(printable)}\n     visual:  {ascii_line(v)}')
     return ascii_line(v)
 
-print(subprocess.run(['fribidi', '--version'], capture_output=True, text=True).stdout.splitlines()[0])
+def stored_in_visual_order(s, base):
+    """The stored characters in the order they are shown, from the visual-to-logical map: no mirroring enters it."""
+    out = subprocess.run(['fribidi', '--nopad', '--nobreak', '--novisual', '--vtol', f'--{base}'],
+                         input=s, capture_output=True, text=True, check=True).stdout
+    return ''.join(s[int(i)] for i in out.split())
+
+FRIBIDI = subprocess.run(['fribidi', '--version'], capture_output=True, text=True).stdout.splitlines()[0]
+VERSION = '.'.join(re.findall(r'\d+', FRIBIDI.split()[-1])[:3])
+FLAGS_HONORED = tuple(int(n) for n in VERSION.split('.')) >= (1, 0, 17)      # --nomirror and --reordernsm work
+print(FRIBIDI, '· --nomirror and --reordernsm take effect:', 'yes (1.0.17 or later)' if FLAGS_HONORED else 'no (before 1.0.17)')
 
 # B0 — the paragraph direction
 check('B0', 'a line that starts with Hebrew', basedir('שלום world'), 'R')
@@ -79,21 +91,31 @@ check('B2', 'the second folder shows before the first', v.find(second[::-1]) < v
 
 # B6 — mirrored brackets
 mirrored = visual('(שלום)', 'rtl')
-plain = visual('(שלום)', 'rtl', ['--nomirror'])
-print(f'  "(שלום)" in RTL: with mirroring {ascii_line(mirrored)} · without {ascii_line(plain)}')
+plain = stored_in_visual_order('(שלום)', 'rtl')
+nomirror = visual('(שלום)', 'rtl', ['--nomirror'])
+print(f'  "(שלום)" in RTL: with mirroring {ascii_line(mirrored)} · without (fribidi --vtol) {ascii_line(plain)}'
+      f' · fribidi --nomirror {ascii_line(nomirror)}')
 check('B6', 'with mirroring the visual line starts with "(" (the stored ")" drawn mirrored)', ascii_line(mirrored), '(MVLW)')
 check('B6', 'without mirroring the stored characters would face the wrong way', ascii_line(plain), ')MVLW(')
+check('B6', f'FriBidi {VERSION}: fribidi --nomirror gives the stored order (it does from 1.0.17; before, it mirrors anyway)',
+      nomirror == plain, FLAGS_HONORED)
 
 # NSM — marks in visual order
 w = 'שָׁלוֹם'
 no_l3 = visual(w, 'rtl')
 l3 = visual(w, 'rtl', ['--reordernsm'])
 HOLAM, VAV = chr(0x5B9), chr(0x5D5)
-check('NSM', 'without L3 the holam stands BEFORE its vav (a left-to-right viewer puts it on the letter before)', no_l3.index(HOLAM) < no_l3.index(VAV), True)
 print('  visual, no L3:  ', ' '.join(f'{ord(c):04X}' for c in no_l3))
 print('  visual, with L3:', ' '.join(f'{ord(c):04X}' for c in l3))
 check('NSM', 'with L3 the holam follows its vav', l3.index(HOLAM) > l3.index(VAV), True)
-check('NSM', 'the two orders differ', no_l3 == l3, False)
+if FLAGS_HONORED:
+    check('NSM', f'FriBidi {VERSION}, without L3: the holam stands BEFORE its vav (a left-to-right viewer puts it on the letter before)',
+          no_l3.index(HOLAM) < no_l3.index(VAV), True)
+    check('NSM', f'FriBidi {VERSION}: the two orders differ', no_l3 == l3, False)
+else:
+    check('NSM', f'FriBidi {VERSION} applies L3 even without --reordernsm (fixed in 1.0.17), so the order without L3 '
+          'is not measured here: the holam follows its vav in both', no_l3.index(HOLAM) > no_l3.index(VAV), True)
+    check('NSM', f'FriBidi {VERSION}: the two orders are the same', no_l3 == l3, True)
 
 # Embedding vs isolate: a Hebrew name inside an English line, followed by ", 5"
 RLE = chr(0x202B)

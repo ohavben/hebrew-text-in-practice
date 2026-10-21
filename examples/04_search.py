@@ -29,7 +29,7 @@ def strip(s):
 w = V['Gen 2:25']['text'].split()[0]                         # the verse's first word, pointed
 pieces = re.findall(r'\w+', w)
 print('pointed word:', show(w), '\n  re.findall(r"\\w+") ->', [show(p) for p in pieces])
-check('S1', r'\w+ returns the pointed word in pieces', len(pieces) > 1, True)
+check('S1', r'\w+ returns the pointed word in pieces: the length of each piece', [len(p) for p in pieces], [1, 1, 1, 1, 1])
 check('S1', r'\w+ on the stripped word returns it whole', re.findall(r'\w+', strip(w)), [strip(w)])
 
 # --- S2: homographs after stripping --------------------------------------------------------------------------
@@ -46,7 +46,7 @@ tokens = text.split()
 exact = sum(t == 'ארצ' for t in tokens)
 prefixed = [t for t in tokens if re.fullmatch('[והבכלמש]{0,3}ארצ', t)]
 print(f'\n"ארץ" in the ten verses: exact {exact}; with up to three proclitics {len(prefixed)} {sorted(set(prefixed))}')
-check('S5', 'the exact-word search misses the prefixed forms', exact < len(prefixed), True)
+check('S5', 'the exact-word search misses the prefixed forms: exact · with the proclitics', (exact, len(prefixed)), (0, 2))
 cands = ['כל', 'הכל', 'בכל', 'לכל', 'מכל', 'שכל']        # SYNTHETIC: the last is the noun "intellect", not ש + כל
 hits = [t for t in cands if re.fullmatch('[והבכלמש]{0,3}כל', t)]
 check('S5', 'the prefix pattern also takes in a word that only looks prefixed', 'שכל' in hits, True)
@@ -72,7 +72,7 @@ toks = [r[0] for r in db.execute('SELECT term FROM v ORDER BY doc, col, offset')
 one_letter = sum(len(x) == 1 for x in toks)
 print(f'unicode61 tokens of pointed Gen 2:6: {len(toks)} (the verse has 9 words); one-letter tokens: {one_letter}')
 print('  first ten:', toks[:10])
-check('S9', 'unicode61 makes more tokens than the verse has words', len(toks) > 9, True)
+check('S9', 'unicode61 makes more tokens than the verse has words (9): tokens · of them one letter long', (len(toks), one_letter), (30, 30))
 check('S9', 'a bare word does not find the pointed verse', db.execute("SELECT count(*) FROM t WHERE t MATCH ?", ('הארץ',)).fetchone()[0], 0)
 
 db.execute('DELETE FROM t')

@@ -11,3 +11,10 @@ font-family: Liberation Mono            -> Liberation Mono (67)
 font-family: monospace                  -> Noto Sans Mono (6) + Times New Roman (48) + Keter YG (15)
 font-family: sans-serif                 -> Arial (54) + Keter YG (15)
 font-family: serif                      -> Times New Roman (54) + Keter YG (15)
+--  [FO1] font-family: Arial: not checked (fontconfig: it lacks some of the verse's 31 code points)
+--  [FO1] font-family: DejaVu Sans: not checked (fontconfig: it lacks some of the verse's 31 code points)
+ok [FO1] font-family: Noto Sans Hebrew, installed with all 31 code points of the verse: drawn by it alone: observed ["Noto Sans Hebrew"]
+ok [FO1] font-family: Ezra SIL, installed with all 31 code points of the verse: drawn by it alone: observed ["Ezra SIL"]
+ok [FO1] font-family: Keter YG, installed with all 31 code points of the verse: drawn by it alone: observed ["Keter YG"]
+ok [FO1] font-family: Liberation Mono, installed with all 31 code points of the verse: drawn by it alone: observed ["Liberation Mono"]
+--- 4 of 4 checks as expected; 2 not checked

@@ -1,19 +1,39 @@
 ok  [SH1] col -b on a pointed word returns the bare letters: observed 'שלום'
     LC_ALL=C.utf8  grep -E '[alef-tav]' -> grep: Invalid collation character|
-    LC_ALL=en_US.utf8  grep -E '[alef-tav]' -> שלום|
-    LC_ALL=POSIX  grep -E '[alef-tav]' -> שלום|café|
 ok  [SH2] C.utf8: the range is refused: observed 'grep: Invalid collation character|'
+    LC_ALL=en_US.utf8  grep -E '[alef-tav]' -> שלום|
 ok  [SH2] en_US.utf8: only the Hebrew line: observed 'שלום|'
+    LC_ALL=POSIX  grep -E '[alef-tav]' -> שלום|café|
 ok  [SH2] POSIX: the range is bytes, and the French line matches too: observed 'שלום|café|'
-ok  [E5] GNU grep on a file with one NUL: observed 'grep: /tmp/tmp.d8FXydAFhb/nul.txt: binary file matches'
+ok  [E5] GNU grep on a file with one NUL: observed 'grep: nul.txt: binary file matches'
 ok  [E5] grep -a reads it as text: observed '1'
     ripgrep: binary file matches (found "\0" byte around offset 8)
 ok  [E5] ripgrep names the NUL: observed 'binary'
 ok  [SH4] wc -c of the pointed word (bytes): observed '14'
 ok  [SH4] wc -m in a UTF-8 locale (characters): observed '7'
+ok  [SH4] every code point of the Hebrew block U+0590..U+05FF, in UTF-8: observed '112 of 2 bytes'
+ok  [SH4] every code point of the presentation forms U+FB1D..U+FB4F, in UTF-8: observed '51 of 3 bytes'
 ok  [SH4] wc -m in the C locale (bytes again): observed '14'
     cut -c1 of 'שלום' -> C.utf8: d7 a9 0a · C: d7 0a   (shin is d7 a9)
-ok  [SH5] GNU cut -c1 in C.utf8 returns the whole letter: observed 'd7 a9 0a'
+ok  [SH5] GNU cut -c1 in C.utf8, coreutils 9.12 (9.11 or later): the whole letter: observed 'd7 a9 0a'
 ok  [SH5] GNU cut -c1 in the C locale returns one byte: observed 'd7 0a'
---- 12 of 12 checks as expected
-grep (GNU grep) 3.12-modified · col from util-linux 2.42.4 · cut (GNU coreutils) 9.12
+    fontconfig version 2.18.3, for the fonts of section 8.1: Hebrew letters (U+05D0) · etnachta (U+0591)
+      Arial: letters yes · etnachta no
+      Times New Roman: letters yes · etnachta no
+      Courier New: letters yes · etnachta no
+      DejaVu Sans: letters yes · etnachta no
+      Open Sans: letters yes · etnachta no
+      David CLM: letters yes · etnachta no
+      Miriam CLM: letters yes · etnachta no
+      Aharoni CLM: letters yes · etnachta no
+      Noto Sans Hebrew: letters yes · etnachta yes
+      Noto Serif Hebrew: letters yes · etnachta yes
+      Ezra SIL: letters yes · etnachta yes
+      Keter YG: letters yes · etnachta yes
+      Frank Ruehl CLM: letters yes · etnachta yes
+      Liberation Sans: letters yes · etnachta yes
+      Liberation Serif: letters yes · etnachta yes
+      Liberation Mono: letters yes · etnachta yes
+      families with U+0591: 103 · with U+0591 and U+05C3 (fc-list ':charset=591 5c3' family): 103
+--- 14 of 14 checks as expected
+grep (GNU grep) 3.12-modified · col from util-linux 2.42.4 · cut (GNU coreutils) 9.12 · ripgrep 15.2.0

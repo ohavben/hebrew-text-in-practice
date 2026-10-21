@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
 """Build the browser test pages and (if chromium is installed) screenshot them.
 
-  python3 make_pages.py            -> bidi.html, fonts.html, blocks.html (+ .png screenshots with chromium)
+  python3 make_pages.py            -> bidi.html, blocks.html, fonts_lang_he.html, fonts_no_lang.html
+                                      (+ a .png screenshot of each with chromium)
 
 The pages are the second method for the bidi claims of 06_bidi.py (a browser's implementation of the same
-algorithm) and the first for the rendering claims: per-block direction, isolates, and fonts for te'amim.
+algorithm) and the first for the rendering claims: per-block direction, isolates, mirrored brackets, and fonts for
+te'amim. This script has no checks: the pages and the screenshots are there to be looked at. It rewrites the
+committed pages and screenshots, so run_all.sh does not run it; run it by hand. The exit status is 1 when chromium
+is installed and a screenshot was not made.
 Every control character is written as an HTML entity (&#x2067;), never as a raw character.
 """
 import html, json, os, shutil, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(os.path.dirname(HERE), 'data', 'verses.json')
-V = {v['ref']: v for v in json.load(open(DATA, encoding='utf-8'))['verses']}
+with open(DATA, encoding='utf-8') as f:
+    V = {v['ref']: v for v in json.load(f)['verses']}
 
 HEAD = '''<!doctype html><html{lang}><head><meta charset="utf-8"><title>{title}</title><style>
  body {{ font: 20px/1.6 "Noto Sans Hebrew", sans-serif; margin: 16px; background: #fff; color: #111; }}
@@ -64,16 +69,25 @@ def fonts_page(lang):
     return out + '</body></html>\n'
 
 def screenshot(name, height):
+    """Screenshot NAME.html into NAME.png; True when chromium is missing or the screenshot was made."""
     exe = shutil.which('chromium') or shutil.which('chromium-browser') or shutil.which('google-chrome')
     if not exe:
-        print('no chromium: open the .html files in a browser instead'); return
+        print('no chromium: open the .html files in a browser instead'); return True
     src, png = os.path.join(HERE, name + '.html'), os.path.join(HERE, name + '.png')
+    before = os.path.getmtime(png) if os.path.exists(png) else None
     cmd = [exe, '--headless=new', '--disable-gpu', '--hide-scrollbars', f'--window-size=1100,{height}',
            f'--screenshot={png}', 'file://' + src]
     r = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
-    print(name, '->', png if os.path.exists(png) else 'NO SCREENSHOT', '(exit', r.returncode, ')')
+    made = os.path.exists(png) and os.path.getmtime(png) != before
+    print(name, '->', png if made else 'NO SCREENSHOT', '(exit', r.returncode, ')')
+    if not made:
+        print('   ', '\n    '.join(r.stderr.strip().splitlines()[-3:]))
+    return made
 
+made = []
 for name, build, h in (('bidi', bidi_page, 620), ('blocks', blocks_page, 520),
                        ('fonts_lang_he', lambda: fonts_page(' lang="he"'), 820), ('fonts_no_lang', lambda: fonts_page(''), 820)):
-    open(os.path.join(HERE, name + '.html'), 'w', encoding='utf-8').write(build())
-    screenshot(name, h)
+    with open(os.path.join(HERE, name + '.html'), 'w', encoding='utf-8') as f:
+        f.write(build())
+    made.append(screenshot(name, h))
+sys.exit(0 if all(made) else 1)

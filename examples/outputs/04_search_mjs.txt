@@ -6,5 +6,7 @@ ok [S1] Unicode-aware boundary finds the whole word: observed true
 ok [S1] and does not match inside a longer word: observed false
 ok [S1] \b-delimited \w+ finds no word in pointed Gen 2:25: observed 0
 ok [S1] [\p{L}\p{M}]+ returns the pointed word whole: observed true
---- 8 of 8 checks as expected
+ok [F2] Gen 2:6 without its points (the maqaf kept): the folded query "from" followed by (?![\p{L}\p{M}]): observed 1
+ok [F2] the same query followed by a whitespace lookahead (?!\S): observed 0
+--- 10 of 10 checks as expected
 node v26.11.1, ICU 78.3, Unicode 17.0

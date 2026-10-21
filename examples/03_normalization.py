@@ -23,6 +23,14 @@ NFD = lambda s: unicodedata.normalize('NFD', s)
 for c in (0x5B0, 0x5B4, 0x5B7, 0x5B8, 0x5BC, 0x5BD, 0x5C1, 0x5C2, 0x591, 0x5A3):
     ch = chr(c)
     print(f'  U+{c:04X} {unicodedata.name(ch):34s} combining class {unicodedata.combining(ch)}')
+teamim = {}                                                   # the te'amim, U+0591..U+05AF, by combining class
+for c in range(0x591, 0x5B0):
+    teamim.setdefault(unicodedata.combining(chr(c)), []).append(f'{c:04X}')
+print(f'  the te\'amim U+0591..U+05AF by combining class (Unicode {unicodedata.unidata_version}):',
+      {k: len(v) for k, v in sorted(teamim.items())}, '· 222:', teamim.get(222), '· 228:', teamim.get(228))
+check('N1', "the classes on the page: sheva, hiriq, patah, qamats, dagesh, meteg, shin dot; the te'amim",
+      ([unicodedata.combining(chr(c)) for c in (0x5B0, 0x5B4, 0x5B7, 0x5B8, 0x5BC, 0x5BD, 0x5C1)], sorted(teamim)),
+      ([10, 14, 17, 18, 21, 22, 24], [220, 222, 228, 230]))
 
 words = [w for v in V.values() for w in v['text'].replace(chr(0x5BE), ' ').split()]
 changed = [w for w in words if NFC(w) != w]
@@ -30,7 +38,7 @@ print(f'\nwords in the ten verses: {len(words)}; changed by NFC: {len(changed)};
 w = next(w for w in changed if chr(0x5BC) in w)
 print('  stored:', show(w))
 print('  NFC:   ', show(NFC(w)))
-check('N1', 'NFC changes some WLC words', len(changed) > 0, True)
+check('N1', 'NFC changes WLC words: in the ten verses, changed · of all words', (len(changed), len(words)), (59, 111))
 check('N1', 'NFC and NFD agree here (no Hebrew precomposed letters in the stored text)', all(NFC(w) == NFD(w) for w in words), True)
 
 # two spellings of one pointed syllable: dagesh then qamats, and qamats then dagesh

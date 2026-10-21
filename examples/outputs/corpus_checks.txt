@@ -10,17 +10,50 @@ TORAH (Gen-Deut, written text, notes removed):
   qere                     67
   pe                      293
   samekh                  394
+  by book: Gen 1,533 verses, 78,069 letters, pe 42, samekh 50 · Exod 1,213 verses, 63,531 letters, pe 70, samekh 94 · Lev 859 verses, 44,795 letters, pe 55, samekh 49 · Num 1,289 verses, 63,545 letters, pe 94, samekh 65 · Deut 959 verses, 54,910 letters, pe 32, samekh 136
+  304,850 letters is the count of this text, the WLC's written words with the notes removed. The figure
+  usually quoted for the Torah, 304,805, counts the letters of a different text (editions differ, section 5.9).
   share of words changed by NFC: 46.9% · words carrying a morphhb slash: 49.5%
-  the stroke U+05C0 as a separate token: {'total': 378, 'after another accent': 63, 'legarmeh by the rule (munach before, next disjunctive revia)': 280, 'part of shalshelet (after a shalshelet word)': 4, 'after a munach word': 315}
+  written words (<w>) 79,982: the morph attribute has as many slashes as the word in 79,982, the lemma attribute in 67,263
+  the stroke U+05C0: {'U+05C0 anywhere in the text': 378, 'total': 378, 'after a munach': 315, 'legarmeh by the rule': 280, 'after a shalshelet word': 4, 'first rule: revia on the next token': 29}
+  bytes in UTF-8, verse by verse: with points and te'amim 1,371,799 · points only 1,243,691 · bare 708,121
 
 WHOLE BIBLE (39 books):
   verses 23,213 · ketiv/qere places 1,251 · combining grapheme joiners (U+034F) 0
   verses with the upper dot U+05C4: 15 · dotted letters: 53
     2Sam.19.20:3 Deut.29.28:10 Ezek.41.20:5 Ezek.46.22:7 Gen.16.5:1 Gen.18.9:4 Gen.19.33:1 Gen.33.4:6 Gen.37.12:2 Isa.44.9:3 Num.21.30:1 Num.29.15:1 Num.3.39:5 Num.9.10:1 Ps.27.13:3
-  letters carrying two vowel points: 641 (stored order already NFC order: 0, reordered by NFC: 641)
-  points on the final letters:
-    HEBREW LETTER FINAL KAF  {'SHEVA': 7405, 'QAMATS': 6516, 'DAGESH OR MAPIQ': 126}
-    HEBREW LETTER FINAL MEM  {}
-    HEBREW LETTER FINAL NUN  {'QAMATS': 40}
-    HEBREW LETTER FINAL PE   {'DAGESH OR MAPIQ': 1, 'SHEVA': 1}
-    HEBREW LETTER FINAL TSADI {}
+  verses with the lower dot U+05C5: 1 · letters: 3 · Ps.27.13:3
+  letters with a dagesh and a vowel: {'dagesh first': 121949}
+  letters carrying two vowel points: 641 (reordered by NFC: 641)
+    the lamed of Jerusalem: {'PATAH + HIRIQ': 348, 'without a prefix': 345, 'QAMATS + HIRIQ': 285, 'with a prefix': 288, 'to Jerusalem: PATAH + SHEVA': 3, 'to Jerusalem: QAMATS + SHEVA': 1}
+    elsewhere: [('Deut.3.22', 'HIRIQ + SHEVA'), ('2Kgs.21.26', 'HOLAM + SHEVA'), ('Isa.49.23', 'HOLAM + QAMATS'), ('Lam.3.25', 'HOLAM + QAMATS')]
+  final letters, by the points each one carries:
+    HEBREW LETTER FINAL KAF  {'SHEVA': 7381, 'QAMATS': 6399, 'DAGESH OR MAPIQ+QAMATS': 102, 'none': 81, 'DAGESH OR MAPIQ+SHEVA': 24, 'METEG+QAMATS': 15}
+    HEBREW LETTER FINAL MEM  {'none': 41291}
+    HEBREW LETTER FINAL NUN  {'none': 15201, 'QAMATS': 40}
+    HEBREW LETTER FINAL PE   {'none': 2553, 'DAGESH OR MAPIQ+SHEVA': 1}
+    HEBREW LETTER FINAL TSADI {'none': 3288}
+  words with a tsadi followed by a tet (reference, language and verb stem, lemma): [('Gen.44.16', 'Ht', '6663'), ('Josh.9.4', 'Ht', '6737'), ('Josh.9.12', 'Ht', '6679'), ('Dan.4.12', 'AM', '6647'), ('Dan.4.20', 'AM', '6647'), ('Dan.4.30', 'AM', '6647'), ('Dan.5.21', 'AM', '6647')]
+  hitpa'el words (morph stem t) with a tav beside a tsadi (reference, lemma): [('Exod.2.4', '3320'), ('Job.9.30', '7364'), ('Ruth.1.18', '553')]
+
+THE NUMBERS ON THE PAGE:
+ok [U2] Torah: strokes U+05C0 · each a token of its own · after a munach · legarmeh by the rule · after a shalshelet word · the rest: observed (378, 378, 315, 280, 4, 94)
+ok [U2] Torah: the first rule (a munach before the stroke, a revia on the next token; a maqaf pair is one token): observed 29
+ok [U3] Bible: letters with the upper dot U+05C4 · verses · in Gen 18:9: observed (53, 15, 4)
+ok [U3] Bible: letters with the lower dot U+05C5 · the verses: observed (3, ['Ps.27.13'])
+ok [F4] final kaf: letters · with a vowel · with a sheva · with a qamats · with both · with a dagesh · a dagesh without a vowel · with a meteg: observed (14002, 13921, 7405, 6516, 0, 126, 0, 15)
+ok [F4] pointed letters: final nun · final pe · final mem · final tsadi; of all of them: observed (40, 1, 0, 0, 62374)
+ok [F4] the points they carry: final nun · final pe, and where that pe is: observed (['QAMATS'], ['DAGESH OR MAPIQ+SHEVA'], ['Prov.30.6'])
+ok [N1] Torah: words NFC changes · of all words · share: observed (37528, 79982, '46.9%')
+ok [N1] Bible: letters with a dagesh and a vowel, the dagesh written first · the vowel first: observed (121949, 0)
+ok [N1] Bible: letters with two vowels · reordered by NFC · combining grapheme joiners: observed (641, 641, 0)
+ok [N1] of them the lamed of Jerusalem: in the name (patah + hiriq, qamats + hiriq; without, with a prefix) · in "to Jerusalem" (patah + sheva, qamats + sheva) · elsewhere: observed ((633, 348, 285, 345, 288), (4, 3, 1), 4)
+ok [S13] words with a tsadi followed by a tet: all are verbs in a t-stem, with tsadi as the first root letter: observed [('Gen.44.16', 'Ht', '6663'), ('Josh.9.4', 'Ht', '6737'), ('Josh.9.12', 'Ht', '6679'), ('Dan.4.12', 'AM', '6647'), ('Dan.4.20', 'AM', '6647'), ('Dan.4.30', 'AM', '6647'), ('Dan.5.21', 'AM', '6647')]
+ok [S13] hitpa'el words with a tav beside a tsadi: none has tsadi as its first root letter (lemmas 3320, 7364, 553): observed [('Exod.2.4', '3320'), ('Job.9.30', '7364'), ('Ruth.1.18', '553')]
+ok [T1] Torah: words carrying a morphhb slash · share: observed (39585, '49.5%')
+ok [T1] Torah: written words · the morph attribute divided like the word · the lemma attribute: observed (79982, 79982, 67263)
+ok [T6] ketiv/qere places: Torah · Bible: observed (67, 1251)
+ok [T7] Torah: verses · words · letters; Bible: verses: observed (5853, 79982, 304850, 23213)
+ok [T5] Torah: section markers pe · samekh: observed (293, 394)
+ok [C1] Torah: UTF-8 bytes with points and te'amim, and with points only, to the bytes of the bare text: observed ('1.94', '1.76')
+--- 19 of 19 checks as expected

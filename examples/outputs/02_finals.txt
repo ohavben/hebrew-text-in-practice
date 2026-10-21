@@ -16,7 +16,12 @@ ok [F1] and that count is not zero: observed True
    folded matches inside longer words: ['המנחה']
 ok [F2] the folded needle also matches inside a longer word: observed ['המנחה']
 ok [F2] a word-end boundary after the folded needle removes exactly those: observed 2
+ok [F2] Gen 2:6 stripped as in section 1.1 (the maqaf kept): the folded query with a whitespace lookahead (?!\S): observed 0
+ok [F2] the same text, with a lookahead that refuses a following letter (?!\w): observed 1
+
+the ten verses, stripped as in section 1.1: 24 words end in a final letter; (?!\S) misses ['Gen 2:6 (before U+05BE)', 'Gen 2:10 (before U+05C3)', 'Exod 1:7 (before U+05C3)', 'Exod 1:22 (before U+05C3)', 'Lev 9:22 (before U+05C3)', 'Ps 107:23 (before U+05C3)']
+ok [F2] the ten verses: words that end in a final letter · found at their end with (?!\S) · with (?!\w): observed (24, 18, 24)
 
 tokens that end in a medial letter, all correct as written: ['תש״פ', 'כ׳', 'פ׳', 'יד:כ']
 ok [F3] a "medial at the end" rule flags correct tokens: observed 2
---- 9 of 9 checks as expected
+--- 12 of 12 checks as expected

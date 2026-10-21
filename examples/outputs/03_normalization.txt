@@ -8,11 +8,13 @@
   U+05C2 HEBREW POINT SIN DOT               combining class 25
   U+0591 HEBREW ACCENT ETNAHTA              combining class 220
   U+05A3 HEBREW ACCENT MUNAH                combining class 220
+  the te'amim U+0591..U+05AF by combining class (Unicode 16.0.0): {220: 10, 222: 2, 228: 1, 230: 18} · 222: ['059A', '05AD'] · 228: ['05AE']
+ok [N1] the classes on the page: sheva, hiriq, patah, qamats, dagesh, meteg, shin dot; the te'amim: observed ([10, 14, 17, 18, 21, 22, 24], [220, 222, 228, 230])
 
 words in the ten verses: 111; changed by NFC: 59; changed by NFD: 59
   stored: כ{05BC}{05B8}ל
   NFC:    כ{05B8}{05BC}ל
-ok [N1] NFC changes some WLC words: observed True
+ok [N1] NFC changes WLC words: in the ten verses, changed · of all words: observed (59, 111)
 ok [N1] NFC and NFD agree here (no Hebrew precomposed letters in the stored text): observed True
 ok [N1] the two orders are different strings: observed False
 ok [N1] and the same string after NFC: observed True
@@ -35,4 +37,4 @@ with a foreign mark: ש{0307}לום -> Hebrew-range strip -> ש{0307}לום
 ok [N3] a Hebrew-range strip leaves U+0307 in place: observed True
 ok [N3] so the word does not equal its plain spelling: observed False
 ok [N3] a category strip (all marks) removes it: observed 'שלום'
---- 14 of 14 checks as expected
+--- 15 of 15 checks as expected

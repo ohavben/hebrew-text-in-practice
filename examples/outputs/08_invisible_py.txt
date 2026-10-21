@@ -11,6 +11,13 @@ ok [E2] none of the nine variants contains the plain word: observed False
 ok [E2] all nine are category Cf (format), except none: observed ['Cf']
 ok [E2] a category scan finds both hidden characters: observed [(4, 'U+200F'), (10, 'U+FEFF')]
 ok [E2] removing category Cf restores the plain words: observed 'שלום עולם\n'
+  "שלום" with U+0000 <unnamed>                           inside: category Cc
+  "שלום" with U+00A0 NO-BREAK SPACE                      inside: category Zs
+  "שלום" with U+2028 LINE SEPARATOR                      inside: category Zl
+  "שלום" with U+2029 PARAGRAPH SEPARATOR                 inside: category Zp
+ok [E2] the four that are not Cf, each inside the word: found by a scan for Cf alone · by the wider scan: observed ([0, 0, 0, 0], [1, 1, 1, 1])
+ok [E2] all thirteen inside the word (the nine above and these four): found by the wider scan: observed 13
+ok [E2] no alarm on the ten verses (points, te'amim, maqaf, paseq, sof pasuq): observed 0
 
   json.dumps default:             {"text": "\u05e9\u05dc\u05d5\u05dd \u05e2\u05d5\u05dc\u05dd"}
   json.dumps(ensure_ascii=False): {"text": "שלום עולם"}
@@ -19,5 +26,5 @@ ok [E4] a search for the word in the default output: observed False
 ok [E4] both decode to the same record: observed True
 ok [E3] Python json.dumps escapes U+2028 by default (ensure_ascii): observed False
 ok [E3] with ensure_ascii=False it is written raw: observed True
-ok [E3] str.splitlines() splits at U+2028 too: observed 2
---- 10 of 10 checks as expected
+ok [E3] str.splitlines() splits at U+2028 and at U+2029 too: observed [2, 2]
+--- 13 of 13 checks as expected

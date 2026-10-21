@@ -3,9 +3,13 @@
 
 For each case the page lays the string out in a block with the given dir; a script asks the browser where each
 character was drawn (Range.getBoundingClientRect) and writes the order of their x positions into the page; the
-page is read back with chromium --dump-dom. The same string goes through fribidi --nomirror (reordering only:
-positions are of the STORED characters, so mirroring is not part of either side). The two visual orders must
-agree. Letters are printed as ASCII capitals (as in 06_bidi.py) so that no viewer reorders the result again.
+page is read back with chromium --dump-dom. FriBidi's side is the same string's stored characters in the order of
+fribidi --vtol, its visual-to-logical map (positions are of the STORED characters, so mirroring is part of neither
+side; --nomirror would do the same, but the fribidi command ignores it before version 1.0.17). The two visual
+orders must agree. Letters are printed as ASCII capitals (as in 06_bidi.py) so that no viewer reorders the result
+again.
+  ISO  <bdi> and elements with a dir attribute are isolates in the browser's style sheet; a plain span is not.
+  X    the browser and FriBidi put the characters of each test line in the same visual order.
 Run: python3 measure_layout.py      (needs chromium and fribidi)
 """
 import html, json, os, re, shutil, subprocess, sys, unicodedata
@@ -57,10 +61,22 @@ exe = shutil.which('chromium') or shutil.which('chromium-browser') or shutil.whi
 if not exe or not shutil.which('fribidi'):
     sys.exit('needs chromium and fribidi')
 src = os.path.join(HERE, 'measure.html')
-open(src, 'w', encoding='utf-8').write(page())
-dom = subprocess.run([exe, '--headless=new', '--disable-gpu', '--dump-dom', 'file://' + src],
-                     capture_output=True, text=True, timeout=120).stdout
-data = json.loads(re.search(r'RESULT(.*?)END', dom, re.S).group(1))
+with open(src, 'w', encoding='utf-8') as f:
+    f.write(page())
+run = subprocess.run([exe, '--headless=new', '--disable-gpu', '--dump-dom', 'file://' + src],
+                     capture_output=True, text=True, timeout=120)
+dom = run.stdout
+found = re.search(r'RESULT(.*?)END', dom, re.S)
+if not found:           # the browser did not run the page: say so, with what it said, instead of a traceback
+    said = run.stderr.strip().splitlines()[-3:]
+    if any('sandbox' in line for line in said):
+        why = "its sandbox could not start (as root, or in a container); Chromium starts there only with --no-sandbox"
+    elif any('Socket path too long' in line for line in said):
+        why = 'the path of its socket was too long; set TMPDIR to a short directory'
+    else:
+        why = 'its last lines are below'
+    sys.exit(f'{exe} did not lay out the page (exit status {run.returncode}): {why}\n' + '\n'.join('    ' + l for l in said))
+data = json.loads(found.group(1))
 print(subprocess.run([exe, '--version'], capture_output=True, text=True).stdout.strip(), '·',
       subprocess.run(['fribidi', '--version'], capture_output=True, text=True).stdout.splitlines()[0])
 
@@ -70,9 +86,9 @@ check('ISO', '<bdi> and elements with a dir attribute are isolates; a plain span
 for (d, s), pos in zip(CASES, data):
     shown = [(x, i) for i, x in pos if x is not None and visible(s[i])]
     browser = ''.join(TRANSLIT.get(s[i], s[i]) for x, i in sorted(shown))
-    fr = subprocess.run(['fribidi', '--nopad', '--nobreak', '--clean', '--nomirror', f'--{d}'],
-                        input=s, capture_output=True, text=True).stdout.rstrip('\n')
-    fribidi = ''.join(TRANSLIT.get(c, c) for c in fr if visible(c))
+    vtol = subprocess.run(['fribidi', '--nopad', '--nobreak', '--novisual', '--vtol', f'--{d}'],
+                          input=s, capture_output=True, text=True, check=True).stdout.split()
+    fribidi = ''.join(TRANSLIT.get(s[int(i)], s[int(i)]) for i in vtol if visible(s[int(i)]))
     label = ''.join(f'<{unicodedata.name(c).split()[-1]}>' if unicodedata.category(c) == 'Cf' else TRANSLIT.get(c, c) for c in s)
     print(f'  {d}  {label}\n       browser: {browser}\n       fribidi: {fribidi}')
     check('X', f'browser and FriBidi agree on {label}', browser, fribidi)

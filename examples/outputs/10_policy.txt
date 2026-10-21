@@ -1,6 +1,9 @@
 ok [D2a] occurrences found in the pointed verses: observed 2
 ok [D2a] none left after masking: observed 0
 ok [D2a] the stored text is untouched: observed True
+  25 variants with a hidden character inside the word
+ok [D2a] a pattern that allows only the Hebrew points: variants masked · variants where the word still shows: observed (0, 25)
+ok [D2a] the pattern that allows any mark and any format character: masked · still shows: observed (25, 0)
   truncate then mask, the last characters: 05B8 05D0 05B8 0596
 ok [D2b] truncate-then-mask leaves letters of the word on screen: observed True
 ok [D2b] mask-then-truncate does not: observed False
@@ -8,4 +11,4 @@ ok [D2c] after one pass the pattern is still there: observed True
 ok [D2c] repeating until nothing changes removes it: observed False
 ok [D2d] a mask keyed to the defective spelling misses the plene one: observed False
 ok [D2d] an optional vav catches both: observed (True, True)
---- 9 of 9 checks as expected
+--- 11 of 11 checks as expected

@@ -1,5 +1,4 @@
-JSON.stringify leaves U+2028 raw: true
-records written: 1 · lines read back by readline: 2
-lines that parse as JSON: 0
-ok [E3] one record, cut in two by readline, neither half parses
+ok [E3] U+2028 in one JSON record: written raw true · lines read back by readline 2 · lines that parse 0 (Node 26: expected 2 and 0; from Node 24 on, readline ends a line there)
+ok [E3] U+2029 in one JSON record: written raw true · lines read back by readline 2 · lines that parse 0 (Node 26: expected 2 and 0; from Node 24 on, readline ends a line there)
+--- 2 of 2 checks as expected
 node v26.11.1
